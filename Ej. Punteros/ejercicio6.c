@@ -1,44 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int d1;
-int d2;
-int cero = 0;
-int uno = 1;
+int main(int argc, char **argv){
+    int **matriz;
+    int nFilas, nColumnas, filas, columnas, llenar, diagonal;
 
-void getDimensiones() {
-    do {
-        system( "cls" );
-        if ( d1 != d2 ) {
-            printf( "Para que la matriz tenga una diagonal principal, las dimensiones deben ser las mismas\n" );
-        };
-        printf( "Valor de la primer dimension: " );
-        scanf( "%i", &d1 );
-        printf( "Valor de la segunda dimension: " );
-        scanf( "%i", &d2 );
-    } while ( d1 != d2 );
-};
+    printf("Introduce el numero de filas: \n");
+    scanf("%d", &nFilas);
+    printf("Introduce el numero de columnas: \n");
+    scanf("%d", &nColumnas);
 
-int main() {
-    getDimensiones();
-    int * pArray[ d1 ][ d2 ];
-    for ( int i = 0; i < d1; i++ ) {
-        for ( int j = 0; j < d2; j++ ) {
-            pArray[ i ][ j ] = &cero;
-        };
-    };
-    int diagonal2 = d1 - 1;
-    for ( int i = 0; i < d1; i++ ) {
-        pArray[ i ][ i ] = &uno;
-        pArray[ i ][ diagonal2 - i ] = &uno;
-    };
-    system( "cls" );
-    printf( "Matriz de %i x %i", d1, d2 );
-    for ( int i = 0; i < d1; i++ ) {
-        printf( "\n" );
-        for ( int j = 0; j < d2; j++ ) {
-            printf( "%i   ", * pArray[ i ][ j ] );
-        };
-    };
+    if (nFilas != nColumnas){
+        printf("El numero de filas y columnas debe de ser ser igual \n");
+    }
+    else{
+        matriz = (int **)malloc(nFilas * sizeof(int *));
+
+        for (filas = 0; filas < nColumnas; filas++){
+            *(matriz + filas) = (int *)malloc(nColumnas * sizeof(int));
+        }
+        for (filas = 0; filas < nFilas; filas++){
+            for (columnas = 0; columnas < nColumnas; columnas++){
+                *(*(matriz + filas) + columnas) = 0;
+            }
+        }
+
+        for (llenar = 0; llenar < nFilas; llenar++){
+            *(*(matriz + llenar) + llenar) = 1;
+        }
+
+        diagonal = nFilas - 1;
+        for (llenar = 0; llenar < nFilas; llenar++){
+            *(*(matriz + llenar) + diagonal) = 1;
+            diagonal--;
+        }
+
+        printf("Arreglo de %d x %d \n\n", nFilas, nColumnas);
+        for (filas = 0; filas < nFilas; filas++){
+            for (columnas = 0; columnas < nColumnas; columnas++){
+                printf("%d ", *(*(matriz + filas) + columnas));
+            }
+            printf("\n");
+        }
+
+        for (filas = 0; filas < nFilas; filas++){
+            free(matriz + filas);
+        }
+        free(matriz);
+    }
     return 0;
-};
+}

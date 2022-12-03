@@ -2,38 +2,38 @@
 #include <stdlib.h>
 int main() {
 
-    int d,i;
+    int nd,i;
     float *numeros;
-    float v, sum, med;
+    float v, suma, promedio;
 
     printf("\nIntroduzca la cantidad de datos: ");
-    scanf("%i", &d);
+    scanf("%i", &nd);
 
-    numeros = malloc(sizeof(float)*d);
+    numeros = malloc(sizeof(float)*nd);
 
-    for ( i = 0; i < d; i++){
+    for ( i = 0; i < nd; i++){
         printf("\nValor numero %i: ",i);
         scanf("%f", &v);
         *(numeros + i) = v;
     }
 
-    float Vm = *(numeros);
-    float VM = *(numeros);
+    float vme = *(numeros);
+    float vma = *(numeros);
 
-    for ( i = 0; i < d; i++){
-        sum += *(numeros + i);
-        if(*(numeros + i) < Vm){
-            Vm = *(numeros + i);
+    for ( i = 0; i < nd; i++){
+        suma += *(numeros + i);
+        if(*(numeros + i) < vme){
+            vme = *(numeros + i);
         }
-        if (*(numeros + i) > VM){
-            VM = *(numeros + i);
+        if (*(numeros + i) > vma){
+            vma = *(numeros + i);
         }
     }
 
-    med = sum / d;
-    printf( "EL promedio es: %.3f\n", med );
-    printf( "El valor menor es: %.3f\n", Vm );
-    printf( "El valor mayor es: %.3f\n", VM );
+    promedio = suma / nd;
+    printf( "\nEL promedio es: %.3f\n", promedio);
+    printf( "El valor menor es: %.3f\n", vme);
+    printf( "El valor mayor es: %.3f\n", vma);
 
     return 0;
 

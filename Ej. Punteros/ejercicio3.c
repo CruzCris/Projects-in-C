@@ -2,20 +2,20 @@
 #include <stdlib.h>
 
 int main() {
-    int tvec,*vec;
-    int r = rand();
+    int tvec,*vector;
+    int n = rand();
 
     printf("\nIngrese el tamano del vector: ");
     scanf("%d", &tvec);
     
-    vec=(int *) malloc(sizeof(int)*tvec);
+    vector=(int *) malloc(sizeof(int)*tvec);
 
     for (int i = 0; i < tvec; i++){
-        *(vec + i) = r;
-        printf("\nValor aleatorio %d es %d \n",i,r);
-        r = rand();
+        *(vector + i) = n;
+        printf("\nValor aleatorio %d es %d \n",i,n);
+        n = rand();
     }
 
-    free(vec);
+    free(vector);
     return 0;
 };
