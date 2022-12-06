@@ -1,29 +1,36 @@
-# include <stdio.h>
-# include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-int main(int argc, char **argv){
-    int i=0;
-    char **mat, car, entero;
-    mat = (char *)malloc(3*(sizeof(char*)));
-    for(i=0; i<3; i++){
-        *(mat + i) = (char*)malloc(3*sizeof(int));
-    }
-    printf("\n Se realizara una matriz 3 x 3");
-    printf("\n Ingrese el caracter de relleno: ");
-    scanf("%s", &car);
-    for(i=0; i<3; i++){
-        entero = i + '0';
-        for(int j=0; j<3; j++){
-            *(*(mat + i)+j)=car;
-            *(*(mat + i)+i)=entero;
+int main(){
+    char **matriz,caracter,a;
+    int tam;
+
+    printf("Ingrese el tamano de filas y columnas: ");
+    scanf("%d",&tam);
+    printf("Ingrese el caracter de relleno: ");
+    scanf(" %c",&caracter);
+
+    matriz=(char **) malloc(sizeof(char*)*tam);
+
+    for(int i=0; i<tam; i++){
+        *(matriz+i)=(char*) malloc(sizeof(char)*tam);
+        a = i+'0';
+        for(int j=0; j<tam; j++){
+            if (i==j){
+                *(*(matriz+i)+j)=a;
+            } else{
+                *(*(matriz+i)+j)=caracter;
+            }
         }
     }
-    for (  i=0; i<3; i++ ) {
-        printf( "\n" );
-        for (int j=0; j<3; j++ ) {
-            printf( "%c   ", *(*(mat + i)+j) );
+    for(int i=0; i<tam; i++){
+        for(int j=0; j<tam; j++){
+            printf("  %c",*(*(matriz+i)+j));
         }
+        printf("\n");
     }
-     printf( "\n" );
+    for(int i=0; i<tam; i++){
+        free(*(matriz+i));
+    }
     return 0;
 }
